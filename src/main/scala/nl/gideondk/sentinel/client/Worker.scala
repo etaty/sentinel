@@ -38,7 +38,7 @@ class SentinelClientWorker[Cmd, Evt](stages: ⇒ PipelineStage[PipelineContext, 
             new TcpReadWriteAdapter >>
             new BackpressureBuffer(lowBytes, highBytes, maxBufferSize))
 
-      val handler = context.actorOf(TcpPipelineHandler.props(init, sender, self).withDeploy(Deploy.local).withDeploy(Deploy.local))
+      val handler = context.actorOf(TcpPipelineHandler.props(init, sender, self).withDeploy(Deploy.local))
       context watch handler
 
       sender ! Register(handler)
